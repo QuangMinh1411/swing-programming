@@ -6,22 +6,22 @@ import java.awt.event.ActionListener;
 
 public class MainFrame extends JFrame {
     private TextPanel textPanel;
-    private JButton btn;
     private ToolBar toolBar;
+    private  FormPanel formPanel;
     public MainFrame() {
         super("Hello World");
         setLayout(new BorderLayout());
         toolBar = new ToolBar();
         textPanel = new TextPanel();
-
+        formPanel = new FormPanel();
         toolBar.setStringListener((text)->{
             textPanel.appendText(text);
         });
 
-
+        add(formPanel, BorderLayout.WEST);
         add(toolBar, BorderLayout.NORTH);
         add(textPanel, BorderLayout.CENTER);
-        setSize(400,500);
+        setSize(600,500);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
     }
