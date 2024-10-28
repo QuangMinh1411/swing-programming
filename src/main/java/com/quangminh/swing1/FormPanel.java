@@ -3,6 +3,8 @@ package com.quangminh.swing1;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class FormPanel extends JLabel {
     private JLabel nameLabel;
@@ -10,6 +12,7 @@ public class FormPanel extends JLabel {
     private JTextField nameField;
     private JTextField occupationField;
     private JButton okBtn;
+    private FormListener formListener;
     public FormPanel() {
         Dimension dim = getPreferredSize();
         dim.width = 250;
@@ -20,7 +23,16 @@ public class FormPanel extends JLabel {
         nameField = new JTextField(10);
         occupationField = new JTextField(10);
         okBtn = new JButton("OK");
-
+        okBtn.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String name = nameField.getText();
+                String occupation = occupationField.getText();
+                FormEvent ev = new FormEvent(this,name,occupation);
+                if(formListener!=null){
+                    formListener.formEventOccurred(ev);
+                }
+            }
+        });
 
         Border innerBorder = BorderFactory.createTitledBorder("Add Person");
         Border outerBorder = BorderFactory.createEmptyBorder(5, 5, 5, 5);
@@ -71,5 +83,9 @@ public class FormPanel extends JLabel {
         gc.insets = new Insets(0, 0, 0, 0);
         add(okBtn, gc);
 
+    }
+
+    public void setFormListener(FormListener listener) {
+        this.formListener = listener;
     }
 }
