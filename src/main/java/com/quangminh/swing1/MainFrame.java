@@ -18,13 +18,12 @@ public class MainFrame extends JFrame {
             textPanel.appendText(text);
         });
 
-        formPanel.setFormListener(new FormListener(){
-            public void formEventOccurred(FormEvent e) {
-                String name = e.getName();
-                String occupation = e.getOccupation();
-                textPanel.appendText(name+":"+occupation+"\n");
+        formPanel.setFormListener(e -> {
+            String name = e.getName();
+            String occupation = e.getOccupation();
+            int id = e.getId();
+            textPanel.appendText(name+":"+occupation+":"+id+"\n");
 
-            }
         });
 
         add(formPanel, BorderLayout.WEST);
