@@ -43,7 +43,8 @@ public class FormPanel extends JLabel {
         empModel.addElement("self-employed");
         empModel.addElement("unemployed");
         empCombo.setModel(empModel);
-
+        empCombo.setSelectedIndex(0);
+        empCombo.setEditable(true);
 
         okBtn = new JButton("OK");
         okBtn.addActionListener(new ActionListener() {
@@ -51,7 +52,9 @@ public class FormPanel extends JLabel {
                 String name = nameField.getText();
                 String occupation = occupationField.getText();
                 AgeCategory ageCat = (AgeCategory) ageList.getSelectedValue();
-                FormEvent ev = new FormEvent(this,name,occupation,ageCat.getId());
+                String empCat = empCombo.getSelectedItem().toString();
+
+                FormEvent ev = new FormEvent(this,name,occupation,ageCat.getId(),empCat);
                 if(formListener!=null){
                     formListener.formEventOccurred(ev);
                 }
@@ -110,6 +113,11 @@ public class FormPanel extends JLabel {
         gc.weightx=1.0;
         gc.weighty=0.2;
 
+        gc.gridx=0;
+        gc.insets = new Insets(0, 0, 0, 5);
+        gc.anchor = GridBagConstraints.FIRST_LINE_END;
+        add(new Label("Age: "),gc);
+
         gc.gridx=1;
         gc.anchor = GridBagConstraints.FIRST_LINE_START;
         gc.insets = new Insets(0, 0, 0, 0);
@@ -120,8 +128,13 @@ public class FormPanel extends JLabel {
         gc.weightx = 1.0;
         gc.weighty = 0.2;
 
+        gc.gridx=0;
+        gc.insets = new Insets(0, 0, 0, 5);
+        gc.anchor = GridBagConstraints.FIRST_LINE_START;
+        add(new Label("Employment: "),gc);
+
         gc.gridx=1;
-        gc.anchor = GridBagConstraints.FIRST_LINE_END;
+        gc.anchor = GridBagConstraints.FIRST_LINE_START;
         gc.insets = new Insets(0, 0, 0, 0);
         add(empCombo, gc);
 

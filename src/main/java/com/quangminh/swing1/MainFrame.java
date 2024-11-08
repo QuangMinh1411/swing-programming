@@ -22,7 +22,8 @@ public class MainFrame extends JFrame {
             String name = e.getName();
             String occupation = e.getOccupation();
             int id = e.getId();
-            textPanel.appendText(name+":"+occupation+":"+id+"\n");
+            String empCat = e.getEmpCat();
+            textPanel.appendText(name+":"+occupation+":"+id+":"+empCat+  "\n");
 
         });
 
